@@ -9,10 +9,12 @@ import { Token } from "../Main";
 
 export interface StakeFormProps {
   token: Token;
+  amount: number;
+  setAmount: Function;
 }
 
-export const StakeForm = ({ token }: StakeFormProps) => {
-  const [amount, setAmount] = useState<number | string | Array<number | string>>(0);
+export const StakeForm = ({ token, amount, setAmount }: StakeFormProps) => {
+  // const [amount, setAmount] = useState<number | string | Array<number | string>>(0);
 
   const { address: tokenAddress, name } = token;
   const { account } = useEthers();
@@ -66,8 +68,13 @@ export const StakeForm = ({ token }: StakeFormProps) => {
   return (
     <>
       <div>
-        <Input onChange={handleInputChange} />
-        <Button color="primary" size="large" onClick={handleStakeSubmit} disabled={isMining}>
+        <Input onChange={handleInputChange} value={amount} />
+        <Button
+          color="primary"
+          size="large"
+          onClick={handleStakeSubmit}
+          disabled={isMining || formattedTokenBalance === 0}
+        >
           {isMining ? <CircularProgress size={26} /> : "Stake"}
         </Button>
       </div>

@@ -6,8 +6,9 @@ import brownieConfig from "../brownie-config.json";
 import dapp from "../dapp.png";
 import eth from "../eth.png";
 import fau from "../dai.png";
-import { YourWallet } from "./yourWallet";
 import { makeStyles } from "@material-ui/core";
+import { YourWallet } from "./yourWallet";
+import { TokenFarm } from "./tokenFarm";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -52,6 +53,8 @@ export const Main = () => {
       <h2 className={classes.title}>Dapp Token App</h2>
 
       <YourWallet supportedTokens={supportedTokens} />
+
+      <TokenFarm supportedTokens={supportedTokens} />
     </>
   );
 };

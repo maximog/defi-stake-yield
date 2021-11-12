@@ -29,11 +29,12 @@ const useStyles = makeStyles((theme) => ({
 export const YourWallet = ({ supportedTokens }: YourWalletProps) => {
   const classes = useStyles();
   const [selectedTokenIndex, setSelectedTokenIndex] = useState<number>(0);
+  const [amount, setAmount] = useState<number>(0);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setSelectedTokenIndex(parseInt(newValue));
+    setAmount(0);
   };
-
   return (
     <Box>
       <h1 className={classes.header}>Your wallet</h1>
@@ -48,8 +49,15 @@ export const YourWallet = ({ supportedTokens }: YourWalletProps) => {
             return (
               <TabPanel value={index.toString()} key={index}>
                 <div className={classes.tabContent}>
-                  <WalletBalance token={supportedTokens[selectedTokenIndex]} />
-                  <StakeForm token={supportedTokens[selectedTokenIndex]} />
+                  <WalletBalance
+                    token={supportedTokens[selectedTokenIndex]}
+                    setAmount={setAmount}
+                  />
+                  <StakeForm
+                    token={supportedTokens[selectedTokenIndex]}
+                    amount={amount}
+                    setAmount={setAmount}
+                  />
                 </div>
               </TabPanel>
             );
